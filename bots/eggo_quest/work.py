@@ -1,0 +1,3 @@
+
+# loadingScreenContainer one click
+# closeTourButton
