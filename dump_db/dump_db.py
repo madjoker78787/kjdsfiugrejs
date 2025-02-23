@@ -2,7 +2,7 @@ import psycopg2
 
 from helper import logger
 
-from data import db
+# from data import db
 
 
 def dump_data_db():
@@ -30,7 +30,7 @@ def dump_data_db():
 #     conn1 = psycopg2.connect(dbname="Telegram", host="localhost", user="postgres", password="postgres", port="5432")
 #     cursor1 = conn1.cursor()
 #     conn1.autocommit = True
-#     for x in d:
+#     for x in db:
 #         # print(x[1], x[2], x[3])
 #         cursor1.execute("INSERT INTO data(number, port, seed, work) VALUES(%s, %s, %s, %s)", (x[1], x[2], x[3], "1", ))
 #     cursor1.close()

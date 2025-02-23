@@ -1,11 +1,9 @@
 import json
 import os
 import sys
-import time
 import zlib
-from datetime import datetime, timedelta
+from datetime import datetime
 from urllib.parse import urlparse, quote
-import subprocess
 
 import requests
 from loguru import logger
@@ -16,9 +14,6 @@ from psycopg2 import sql
 
 from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common import TimeoutException
 
 
 from config import settings

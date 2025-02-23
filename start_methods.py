@@ -27,7 +27,7 @@ def start_one():
     num = cursor.fetchone()
     driver = driver_browser(user_folder=num[1],
                             port_=num[2],
-                            proxy_="http://dfxhfhaw-rotate:rdhoxlgxoqub@p.webshare.io:80/"
+                            proxy_=settings.PROXY
                             )
     cursor.close()
     conn.close()
@@ -60,7 +60,7 @@ def add_account():
                 driver = driver_browser(
                     user_folder=number,
                     port_=8742,
-                    proxy_="http://dfxhfhaw-rotate:rdhoxlgxoqub@p.webshare.io:80/",
+                    proxy_=settings.PROXY,
                     dev=False
                 )
                 driver.get("https://web.telegram.org/k/")
@@ -83,7 +83,7 @@ def add_account():
     driver = driver_browser(
         user_folder=number,
         port_=int(port[0]) + 1,
-        proxy_="http://dfxhfhaw-rotate:rdhoxlgxoqub@p.webshare.io:80/",
+        proxy_=settings.PROXY,
         dev=False
     )
 
