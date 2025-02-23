@@ -15,7 +15,7 @@ from helper import (logger,
 
 from settings_bots import lst_bots
 
-from proxy_list import lst
+from config import settings
 
 
 class Bots:
@@ -92,7 +92,7 @@ class Bots:
 
         driver = driver_browser(user_folder=data[1],
                                 port_=data[2],
-                                proxy_=lst[data[0]],
+                                proxy_=settings.PROXY,
                                 dev=self.dev)
         self.driver = driver
         self.session_id = data[0]
@@ -120,8 +120,7 @@ class Bots:
                     if not retry:
                         driver = driver_browser(user_folder=data[1],
                                                 port_=data[2],
-                                                proxy_="http://dfxhfhaw-rotate:rdhoxlgxoqub@p.webshare.io:80/",
-                                                # proxy_=lst[data[0]],
+                                                proxy_=settings.PROXY,
                                                 dev=bot_info['dev'])
 
                         self.driver = driver

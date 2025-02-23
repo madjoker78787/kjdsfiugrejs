@@ -6,6 +6,8 @@ class Settings:
     DB_USER: str = "postgres"
     DB_PASSWORD: str = "postgres"
     TABLE_TELEGRAM: str = "data"
+
+    PROXY: str = "http://dfxhfhaw-rotate:rdhoxlgxoqub@p.webshare.io:80/"
     WORKERS: int = 5
 
 

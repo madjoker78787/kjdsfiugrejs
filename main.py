@@ -65,7 +65,7 @@ if __name__ == '__main__':
                 with Pool(processes=5) as pool:
                     pool.map(pool_many, get_five_accounts())
             elif action == 6:
-                test_main(user_="test", port_="8742", pro="http://dfxhfhaw-rotate:rdhoxlgxoqub@p.webshare.io:80/")
+                test_main(user_="test", port_="8742", pro=settings.PROXY)
             elif action == 7:
                 try:
                     init_postgres()
