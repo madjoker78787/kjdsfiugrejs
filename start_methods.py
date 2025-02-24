@@ -7,6 +7,8 @@ from browser import driver_browser
 
 from config import settings
 
+from helper import logger
+
 
 def start_one():
     conn = psycopg2.connect(
@@ -22,15 +24,19 @@ def start_one():
     for i in nums:
         print(f"id [ {i[0]} ] номер [ {i[1]} ]")
 
-    id_ = int(input("выбери номер(не id) -> "))
+    id_ = int(input("выбери id -> "))
     cursor.execute("SELECT id, number, port FROM data WHERE id = %s", (id_,))
     num = cursor.fetchone()
+    cursor.close()
+    conn.close()
+
     driver = driver_browser(user_folder=num[1],
                             port_=num[2],
                             proxy_=settings.PROXY
                             )
-    cursor.close()
-    conn.close()
+
+    logger.success(f"запуск {nums[1]}")
+
     driver.set_window_size(950, 1000)
     driver.get("https://web.telegram.org/k/")
 
@@ -113,7 +119,7 @@ def get_five_accounts():
 def pool_many(accs):
     driver = driver_browser(user_folder=accs[1],
                             port_=accs[2],
-                            proxy_="http://dfxhfhaw-rotate:rdhoxlgxoqub@p.webshare.io:80/")
+                            proxy_=settings.PROXY)
     driver.set_window_size(950, 1000)
 
     driver.get("https://web.telegram.org/k")

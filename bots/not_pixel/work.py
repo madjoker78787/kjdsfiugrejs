@@ -47,7 +47,7 @@ class PixelNotSeason:
                                                                "._BrowserHeaderTabIcon_m63td_111"))
             )
         except TimeoutException:
-            return self.not_pixel_func(driver=self.driver, info=self.info)
+            return self.not_pixel_func(info=self.info, recovery=True)
         time.sleep(0.5)
         btn_icon = self.driver.find_elements(By.CLASS_NAME, "btn-icon._BrowserHeaderButton_m63td_65"
                                                             "._BrowserHeaderTabIcon_m63td_111")
@@ -59,7 +59,7 @@ class PixelNotSeason:
                 EC.presence_of_element_located((By.CLASS_NAME, "btn-menu-item.rp-overflow"))
             )
         except TimeoutException:
-            return self.not_pixel_func(driver=self.driver, info=self.info)
+            return self.not_pixel_func(info=self.info, recovery=True)
         btn_menu_item = self.driver.find_elements(By.CLASS_NAME, "btn-menu-item.rp-overflow")
         for x in btn_menu_item:
             if "Reload" in x.text:
@@ -91,7 +91,7 @@ class PixelNotSeason:
             )
             time.sleep(0.5)
         except TimeoutException:
-            return self.not_pixel_func(driver=self.driver, info=self.info)
+            return self.not_pixel_func(info=self.info, recovery=True)
         time.sleep(3)
         zoom = self.driver.find_elements(By.CLASS_NAME, "_button_1txd3_27")
         for z in range(self.zoom_count):
@@ -127,7 +127,7 @@ class PixelNotSeason:
                         self.iframe = None
                         self.list_coord = {}
                         time.sleep(0.5)
-                        return self.not_pixel_func(driver=self.driver, info=self.info)
+                        return self.not_pixel_func(info=self.info, recovery=True)
                     try:
                         if self.list_coord[index]:
 
@@ -238,8 +238,9 @@ class PixelNotSeason:
         self.list_coord = lst
         self.link = f"https://t.me/notpixel/app?startapp=x{center_x}_y{center_y}"
 
-    def not_pixel_func(self, driver: webdriver.Chrome, info=None, retry=0):
-        self.driver = driver
+    def not_pixel_func(self, driver: webdriver.Chrome=None, info=None, retry=0, recovery=False):
+        if not recovery:
+            self.driver = driver
         self.driver.switch_to.default_content()
         if info:
             self.info = info
@@ -268,7 +269,7 @@ class PixelNotSeason:
                 EC.presence_of_element_located((By.CLASS_NAME, "popup-button.btn.primary.rp"))
             )
         except TimeoutException:
-            return self.not_pixel_func(driver=self.driver, info=self.info, retry=retry + 1)
+            return self.not_pixel_func(info=self.info, retry=retry + 1, recovery=True)
 
         time.sleep(0.3)
         launch_btn = self.driver.find_elements(By.CLASS_NAME, "popup-button.btn.primary.rp")
@@ -286,7 +287,7 @@ class PixelNotSeason:
             # self.driver.execute_script("arguments[0].setAttribute('src', arguments[1]);", f,
             #                            f"{src[0]}8.0{src[1]}")
         except TimeoutException:
-            return self.not_pixel_func(driver=self.driver, info=self.info, retry=retry + 1)
+            return self.not_pixel_func(info=self.info, retry=retry + 1, recovery=True)
 
         try:
             self.iframe = self.driver.find_element(By.TAG_NAME, "iframe")
@@ -295,7 +296,7 @@ class PixelNotSeason:
             start_time = datetime.now()
             while True:
                 if datetime.now() - start_time > timedelta(seconds=40):
-                    return self.not_pixel_func(driver=self.driver, retry=retry + 1)
+                    return self.not_pixel_func(info=self.info, retry=retry + 1, recovery=True)
                 if self.driver.execute_script("return document.readyState") == "complete":
                     break
                 else:
@@ -304,7 +305,7 @@ class PixelNotSeason:
             return paint
         except Exception as e:
             logger.error(f"{e}")
-            return self.not_pixel_func(driver=self.driver, info=self.info, retry=retry + 1)
+            return self.not_pixel_func(info=self.info, retry=retry + 1, recovery=True)
 
 
 def generate_telegram_url(link):

@@ -8,7 +8,7 @@ lst_bots = {
     "not_pixel": {
             "is_work": True,
             "table_name": "not_pixel_table",
-            "delay": 300,
+            "delay": 30,
             "url": "https://t.me/notpixel/app?startapp",
             "dev": False,
             "function": PixelNotSeason().not_pixel_func,
